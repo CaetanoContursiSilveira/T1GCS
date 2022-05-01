@@ -47,4 +47,8 @@ public class Post{
     public void RemoverComentario(int i){
         comentarios.remove(i);
     }
+
+    public String toString() {
+        return String.format("Autor: %s\nData: %s\nTexto: %s\nTags: %s", autor.getNome(), data, texto, getTags());
+    }
 }

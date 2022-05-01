@@ -28,4 +28,11 @@ public class Menu {
 
 
     }
+
+    public void listarPostagens() {
+        for (Post postagem : todasPostagens) {
+            System.out.println("\n---------------------------------");
+            System.out.println(postagem);
+        }
+    }
 }

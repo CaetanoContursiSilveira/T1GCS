@@ -26,6 +26,9 @@ public class App {
                 case 2:
                     menu.criarNovaPostagem();
                     break;
+                case 3:
+                    menu.listarPostagens();
+                    break;
             }
             System.out.println("Digite nova opção:");
             opcao = Integer.parseInt(reader.readLine());
