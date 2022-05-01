@@ -31,7 +31,11 @@ public class Post{
         return String.join(", ",tags);
     }
 
-    public void AdicionarTag(String t){
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    public void AdicionarTags(String t){
         tags.add(t);
     }
 
