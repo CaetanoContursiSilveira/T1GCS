@@ -39,9 +39,8 @@ public class Post{
         tags.add(t);
     }
 
-    public void AdicionarLink(String l){
-        if(l.startsWith("http://")|| l.startsWith("https://")) link = l;
-        else System.out.println("Link inválido.\n");
+    public void AdicionarLink(String link) {
+         this.link = link;
     }
 
     public void AdicionarComentario(Comentario c){
@@ -53,6 +52,6 @@ public class Post{
     }
 
     public String toString() {
-        return String.format("Autor: %s\nData: %s\nTexto: %s\nTags: %s", autor.getNome(), data, texto, getTags());
+        return String.format("Autor: %s\nData: %s\nTexto: %s\nTags: %s\nLink: %s", autor.getNome(), data, texto, getTags(), link);
     }
 }
