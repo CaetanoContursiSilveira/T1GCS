@@ -5,9 +5,9 @@ public class User{
     private String nome;
     private boolean tipo;//true = adm
 
-    public User(String n, boolean t){
-        this.nome = n;
-        this.tipo = t;
+    public User(String nome, boolean tipo){
+        this.nome = nome;
+        this.tipo = tipo;
         this.id = count.incrementAndGet();
     }
 

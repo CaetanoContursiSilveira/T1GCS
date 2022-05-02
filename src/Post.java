@@ -31,13 +31,16 @@ public class Post{
         return String.join(", ",tags);
     }
 
-    public void AdicionarTag(String t){
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    public void AdicionarTags(String t){
         tags.add(t);
     }
 
-    public void AdicionarLink(String l){
-        if(l.startsWith("http://")|| l.startsWith("https://")) link = l;
-        else System.out.println("Link inválido.\n");
+    public void AdicionarLink(String link) {
+         this.link = link;
     }
 
     public void AdicionarComentario(Comentario c){
@@ -46,5 +49,9 @@ public class Post{
 
     public void RemoverComentario(int i){
         comentarios.remove(i);
+    }
+
+    public String toString() {
+        return String.format("Autor: %s\nData: %s\nTexto: %s\nTags: %s\nLink: %s", autor.getNome(), data, texto, getTags(), link);
     }
 }
