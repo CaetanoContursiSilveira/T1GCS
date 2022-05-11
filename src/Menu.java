@@ -10,8 +10,8 @@ public class Menu {
     private User usuarioAtivo;
     private BufferedReader reader;
 
-    public Menu(BufferedReader reader) {
-        this.todasPostagens = new ArrayList<>();
+    public Menu(BufferedReader reader, ArrayList<Post> postagensInicial) {
+        this.todasPostagens = postagensInicial;
         this.reader = reader;
         this.usuarioAtivo = new User("Jose",false);
     }
@@ -21,7 +21,7 @@ public class Menu {
             System.out.println("Digite o texto da postagem:");
             String texto = reader.readLine();
 
-            Post novo = new Post(usuarioAtivo, texto);
+            Post novo = new Post(todasPostagens.size() + 1, usuarioAtivo, texto);
 
             System.out.println("Digite as tags da postagem (separados por vírgula:");
             String tags = reader.readLine();
@@ -48,6 +48,31 @@ public class Menu {
         for (Post postagem : todasPostagens) {
             System.out.println("\n---------------------------------");
             System.out.println(postagem);
+        }
+    }
+
+    private void listarSumarioPostagens() {
+        for (Post postagem : todasPostagens) {
+            System.out.println("\n---------------------------------");
+            System.out.println(postagem.sumario());
+        }
+    }
+    public void criarComentario() {
+        try {
+            listarSumarioPostagens();
+
+            System.out.println("Digite o ID da postagem que deseja comentar:");
+            int id = Integer.parseInt(reader.readLine());
+
+            Post postagem = todasPostagens.get(id-1);
+            System.out.println("Digite o seu comentario:");
+            String texto = reader.readLine();
+
+            Comentario comentario = new Comentario(usuarioAtivo, texto);
+            postagem.AdicionarComentario(comentario);
+
+        } catch (IOException erro) {
+            System.out.println("Erro ao processar entrada");
         }
     }
 }
