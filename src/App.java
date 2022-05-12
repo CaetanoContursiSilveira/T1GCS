@@ -50,6 +50,9 @@ public class App {
                     case 3:
                         menu.listarPostagens();
                         break;
+                    case 4:
+                        menu.excluirPost();
+                        break;
                     case 5:
                         menu.criarNovoUsuario();
                     case 6:

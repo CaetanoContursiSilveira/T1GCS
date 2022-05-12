@@ -139,6 +139,29 @@ public void criarComentario() {
     }
 }
 
+    public void excluirPost() {
+        try {
+            System.out.println("Escolha a postagem que deseja excluir");
+            Integer opcao = Integer.parseInt(reader.readLine());
+
+            if (usuarioAtivo.eadm()) {
+                todasPostagens.remove(opcao - 1);
+                System.out.println("Post " + (opcao - 1) + " removido");
+            }
+
+            if (!usuarioAtivo.eadm()) {
+                if (todasPostagens.get(opcao - 1).getAutor().equals(usuarioAtivo)) {
+                    todasPostagens.remove(opcao - 1);
+                    System.out.println("Post " + (opcao) + " removido");
+                } else {
+                    System.out.println("Você não tem permissão para deletar esse post");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada ou usuário não selecionado");
+        }
+    }
+
     public void usuariosPadroes() {
         todosUsuarios.add(new User("joao", true));
         todosUsuarios.add(new User("pedro", false));
