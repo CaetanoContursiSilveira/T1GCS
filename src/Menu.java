@@ -32,6 +32,7 @@ public class Menu {
                     if (user.equals(usuario.getNome())) {
                         this.usuarioAtivo = usuario;
                         escolheu = true;
+                        System.out.println("Usuário " + user + " escolhido!");
                     }
                 }
                 if (escolheu == false) {
@@ -53,7 +54,7 @@ public class Menu {
 
                 Post novo = new Post(usuarioAtivo, texto);
 
-                System.out.println("Digite as tags da postagem (separados por vírgula:");
+                System.out.println("Digite as tags da postagem (separados por vírgula):");
                 String tags = reader.readLine();
                 List<String> list = Arrays.asList(tags.split(","));
                 novo.setTags(new ArrayList<>(list));
@@ -111,5 +112,13 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("Erro ao processar entrada");
         }
+    }
+
+    public void usuariosPadroes() {
+        todosUsuarios.add(new User("joao", true));
+        todosUsuarios.add(new User("pedro", false));
+        todosUsuarios.add(new User("lucas", true));
+        todosUsuarios.add(new User("matheus", false));
+        todosUsuarios.add(new User("nicolas", true));
     }
 }
