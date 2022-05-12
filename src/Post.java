@@ -54,6 +54,10 @@ public class Post {
         comentarios.remove(i);
     }
 
+    public ArrayList<Comentario> getComentarios() {
+        return comentarios;
+    }
+
     public String toString() {
         return String.format("Id: %d\nAutor: %s\nData: %s\nTexto: %s\nTags: %s\nLink: %s\nComentários: %s", id,
                 autor.getNome(), data, texto, getTags(), link, Arrays.toString(comentarios.toArray()));

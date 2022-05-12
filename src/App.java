@@ -24,6 +24,7 @@ public class App {
         System.out.println("8 - Adicionar palavra proibida");
         System.out.println("9 - Remover palavra proibida");
         System.out.println("10 - Ver log de posts proibidos");
+        System.out.println("11 - Informações para o adm");
         System.out.println("99 - Sair");
 
         // Reading data using readLine
@@ -61,6 +62,9 @@ public class App {
                         break;
                     case 10:
                         menu.verLogPostagensProibidas();
+                        break;
+                    case 11:
+                        menu.informacoesParaOAdm();
                         break;
                 }
                 if (opcao != 99) {
