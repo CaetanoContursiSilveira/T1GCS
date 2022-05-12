@@ -86,4 +86,29 @@ public class Menu {
         }
 
     }
+
+    private void listarSumarioPostagens() {
+        for (Post postagem : todasPostagens) {
+            System.out.println("\n---------------------------------");
+            System.out.println(postagem.sumario());
+        }
+    }
+    public void criarComentario() {
+        try {
+            listarSumarioPostagens();
+
+            System.out.println("Digite o ID da postagem que deseja comentar:");
+            int id = Integer.parseInt(reader.readLine());
+
+            Post postagem = todasPostagens.get(id-1);
+            System.out.println("Digite o seu comentario:");
+            String texto = reader.readLine();
+
+            Comentario comentario = new Comentario(usuarioAtivo, texto);
+            postagem.AdicionarComentario(comentario);
+
+        } catch (IOException erro) {
+            System.out.println("Erro ao processar entrada");
+        }
+    }
 }
