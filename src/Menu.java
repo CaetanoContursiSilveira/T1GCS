@@ -53,7 +53,7 @@ public class Menu {
                 System.out.println("Digite o texto da postagem:");
                 String texto = reader.readLine();
 
-                Post novo = new Post(usuarioAtivo, texto);
+                Post novo = new Post((todosUsuarios.size() + 1), usuarioAtivo, texto);
 
                 System.out.println("Digite as tags da postagem (separados por vírgula):");
                 String tags = reader.readLine();
@@ -147,20 +147,20 @@ public class Menu {
     }
 
     public void postsPadroes() {
-        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 1"));
-        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 2"));
-        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 3"));
-        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 1"));
-        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 2"));
-        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 3"));
-        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 1"));
-        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 2"));
-        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 3"));
-        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 1"));
-        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 2"));
-        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 3"));
-        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 1"));
-        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 2"));
-        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 3"));
+        todasPostagens.add(new Post(1, todosUsuarios.get(0), "post do joao 1"));
+        todasPostagens.add(new Post(2, todosUsuarios.get(0), "post do joao 2"));
+        todasPostagens.add(new Post(3, todosUsuarios.get(0), "post do joao 3"));
+        todasPostagens.add(new Post(4, todosUsuarios.get(1), "post do pedro 1"));
+        todasPostagens.add(new Post(5, todosUsuarios.get(1), "post do pedro 2"));
+        todasPostagens.add(new Post(6, todosUsuarios.get(1), "post do pedro 3"));
+        todasPostagens.add(new Post(7, todosUsuarios.get(2), "post do lucas 1"));
+        todasPostagens.add(new Post(8, todosUsuarios.get(2), "post do lucas 2"));
+        todasPostagens.add(new Post(9, todosUsuarios.get(2), "post do lucas 3"));
+        todasPostagens.add(new Post(10, todosUsuarios.get(3), "post do matheus 1"));
+        todasPostagens.add(new Post(11, todosUsuarios.get(3), "post do matheus 2"));
+        todasPostagens.add(new Post(12, todosUsuarios.get(3), "post do matheus 3"));
+        todasPostagens.add(new Post(13, todosUsuarios.get(4), "post do nicholas 1"));
+        todasPostagens.add(new Post(14, todosUsuarios.get(4), "post do nicholas 2"));
+        todasPostagens.add(new Post(15, todosUsuarios.get(4), "post do nicholas 3"));
     }
 }

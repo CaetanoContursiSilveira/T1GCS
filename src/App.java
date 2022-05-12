@@ -1,16 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class App {
-
     public static void main(String[] args) throws IOException {
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
         Menu menu = new Menu(reader);
         menu.usuariosPadroes();
+        menu.postsPadroes();
 
         System.out.println("Bem Vindo ao Blog Interno de T1GCS, digite o número da opção desejada:");
         System.out.println("1 - Escolher usuário ativo");
@@ -47,6 +46,7 @@ public class App {
                 }
             } catch (Exception e) {
                 System.out.println("Opção inválida, digite nova opção:");
+
             }
         }
 

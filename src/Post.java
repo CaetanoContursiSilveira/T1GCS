@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Post{
+    private int id;
     private User autor;
     private String texto;
     private ArrayList <String> tags = new ArrayList <String>(); 
@@ -8,7 +11,8 @@ public class Post{
     private String link;
     private ArrayList <Comentario> comentarios = new ArrayList <Comentario>();
 
-    public Post(User a, String t){
+    public Post(int id, User a, String t){
+        this.id = id;
         this.autor = a;
         this.texto = t;
         this.data = LocalDateTime.now();
@@ -52,6 +56,10 @@ public class Post{
     }
 
     public String toString() {
-        return String.format("Autor: %s\nData: %s\nTexto: %s\nTags: %s\nLink: %s", autor.getNome(), data, texto, getTags(), link);
+        return String.format("Id: %d\nAutor: %s\nData: %s\nTexto: %s\nTags: %s\nLink: %s\nComentários: %s", id, autor.getNome(), data, texto, getTags(), link, Arrays.toString(comentarios.toArray()));
+    }
+
+    public String sumario() {
+        return String.format("Id: %d\nTexto: %s", id, texto);
     }
 }
