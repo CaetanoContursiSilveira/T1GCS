@@ -22,7 +22,6 @@ public class App {
                 new InputStreamReader(System.in));
         Menu menu = new Menu(reader, postagensInicial());
 
-
         System.out.println("Bem Vindo ao Blog Interno de T1GCS, digite o número da opção desejada:");
         System.out.println("1 - Escolher usuário ativo");
         System.out.println("2 - Criar uma nova postagem");
@@ -32,24 +31,26 @@ public class App {
         System.out.println("6 - Sair");
 
         // Reading data using readLine
-        Integer opcao = Integer.parseInt(reader.readLine());
-        while (opcao != 6) {
-            switch (opcao) {
-                case 2:
-                    menu.criarNovaPostagem();
-                    break;
-                case 3:
-                    menu.listarPostagens();
-                    break;
-                case 5:
-                    menu.criarComentario();
-                    break;
+        Integer opcao = 0;
+        while (opcao != 5) {
+            try {
+                opcao = Integer.parseInt(reader.readLine());
+                switch (opcao) {
+                    case 1:
+                        menu.escolherUsuario();
+                    case 2:
+                        menu.criarNovaPostagem();
+                        break;
+                    case 3:
+                        menu.listarPostagens();
+                        break;
+                }
+                System.out.println("Digite nova opção:");
+            } catch (Exception e) {
+                System.out.println("Opção inválida, digite nova opção:");
+
             }
-            System.out.println("Digite nova opção:");
-            opcao = Integer.parseInt(reader.readLine());
         }
 
-
-        
     }
 }
