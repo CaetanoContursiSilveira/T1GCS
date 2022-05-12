@@ -27,8 +27,10 @@ public class App {
         System.out.println("2 - Criar uma nova postagem");
         System.out.println("3 - Listar postagens");
         System.out.println("4 - Excluir postagem");
-        System.out.println("5 - Criar comentário");
-        System.out.println("6 - Sair");
+        System.out.println("5 - Criar novo usuário");
+        System.out.println("6 - Fazer comentário");
+        System.out.println("9 - Sair");
+
 
         // Reading data using readLine
         Integer opcao = 0;
@@ -43,6 +45,11 @@ public class App {
                         break;
                     case 3:
                         menu.listarPostagens();
+                        break;
+                    case 5:
+                        menu.criarNovoUsuario();
+                    case 6:
+                        menu.criarComentario();
                         break;
                 }
                 System.out.println("Digite nova opção:");

@@ -25,14 +25,16 @@ public class Menu {
                 System.out.println(usuario.getNome());
             }
             String user = "";
-            while (usuarioAtivo == null) {
+            boolean escolheu = false;
+            while (escolheu == false) {
                 user = reader.readLine();
                 for (User usuario : todosUsuarios) {
                     if (user.equals(usuario.getNome())) {
                         this.usuarioAtivo = usuario;
+                        escolheu = true;
                     }
                 }
-                if (usuarioAtivo == null) {
+                if (escolheu == false) {
                     System.out.println("Usuário inválido, digite novamente");
                 }
             }
@@ -75,40 +77,63 @@ public class Menu {
 
     }
 
-    public void listarPostagens() {
-        if (todasPostagens.size() != 0) {
-            for (Post postagem : todasPostagens) {
-                System.out.println("\n---------------------------------");
-                System.out.println(postagem);
-            }
-        } else {
-            System.out.println("Nenhuma postagem ainda");
-        }
-
-    }
-
-    private void listarSumarioPostagens() {
+public void listarPostagens() {
+    if (todasPostagens.size() != 0) {
         for (Post postagem : todasPostagens) {
             System.out.println("\n---------------------------------");
-            System.out.println(postagem.sumario());
+            System.out.println(postagem);
         }
+    } else {
+        System.out.println("Nenhuma postagem ainda");
     }
-    public void criarComentario() {
-        try {
-            listarSumarioPostagens();
 
-            System.out.println("Digite o ID da postagem que deseja comentar:");
-            int id = Integer.parseInt(reader.readLine());
+}
+public void criarNovoUsuario() {
+    try {
+        System.out.print("Digite o nome do usuário: ");
+        String nome = reader.readLine();
 
-            Post postagem = todasPostagens.get(id-1);
-            System.out.println("Digite o seu comentario:");
-            String texto = reader.readLine();
-
-            Comentario comentario = new Comentario(usuarioAtivo, texto);
-            postagem.AdicionarComentario(comentario);
-
-        } catch (IOException erro) {
-            System.out.println("Erro ao processar entrada");
+        System.out.println(
+                "Digite T para solicitar privilégios de administrador, caso contrário, deixe em branco");
+        String adm = reader.readLine();
+        boolean isAdm = false;
+        while (!adm.equals("T")) {
+            if (adm.equals("T")) {
+                isAdm = true;
+            } else {
+                System.out.println("Entrada inválida, digite novamente");
+                adm = reader.readLine();
+            }
         }
+        todosUsuarios.add(new User(nome, isAdm));
+        System.out.println("Usuário " + nome + " criado!");
+    } catch (Exception e) {
+        System.out.println("Erro ao processar entrada");
     }
+}
+
+private void listarSumarioPostagens() {
+    for (Post postagem : todasPostagens) {
+        System.out.println("\n---------------------------------");
+        System.out.println(postagem.sumario());
+    }
+}
+public void criarComentario() {
+    try {
+        listarSumarioPostagens();
+
+        System.out.println("Digite o ID da postagem que deseja comentar:");
+        int id = Integer.parseInt(reader.readLine());
+
+        Post postagem = todasPostagens.get(id-1);
+        System.out.println("Digite o seu comentario:");
+        String texto = reader.readLine();
+
+        Comentario comentario = new Comentario(usuarioAtivo, texto);
+        postagem.AdicionarComentario(comentario);
+
+    } catch (IOException erro) {
+        System.out.println("Erro ao processar entrada");
+    }
+  }
 }
