@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menu {
     private ArrayList<Post> todasPostagens;
@@ -32,6 +33,7 @@ public class Menu {
                     if (user.equals(usuario.getNome())) {
                         this.usuarioAtivo = usuario;
                         escolheu = true;
+                        System.out.println("Usuário " + user + " escolhido!");
                     }
                 }
                 if (escolheu == false) {
@@ -53,7 +55,7 @@ public class Menu {
 
                 Post novo = new Post(usuarioAtivo, texto);
 
-                System.out.println("Digite as tags da postagem (separados por vírgula:");
+                System.out.println("Digite as tags da postagem (separados por vírgula):");
                 String tags = reader.readLine();
                 List<String> list = Arrays.asList(tags.split(","));
                 novo.setTags(new ArrayList<>(list));
@@ -135,5 +137,32 @@ public void criarComentario() {
     } catch (IOException erro) {
         System.out.println("Erro ao processar entrada");
     }
-  }
+}
+
+    public void usuariosPadroes() {
+        todosUsuarios.add(new User("joao", true));
+        todosUsuarios.add(new User("pedro", false));
+        todosUsuarios.add(new User("lucas", true));
+        todosUsuarios.add(new User("matheus", false));
+        todosUsuarios.add(new User("nicolas", true));
+    }
+
+    public void postsPadroes() {
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 3"));
+    }
+
 }
