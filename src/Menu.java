@@ -145,4 +145,22 @@ public class Menu {
         todosUsuarios.add(new User("matheus", false));
         todosUsuarios.add(new User("nicolas", true));
     }
+
+    public void postsPadroes() {
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 3"));
+    }
 }
