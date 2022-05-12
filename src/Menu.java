@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menu {
     private ArrayList<Post> todasPostagens;
@@ -111,6 +112,29 @@ public class Menu {
             System.out.println("Usuário " + nome + " criado!");
         } catch (Exception e) {
             System.out.println("Erro ao processar entrada");
+        }
+    }
+
+    public void excluirPost() {
+        try {
+            System.out.println("Escolha a postagem que deseja excluir");
+            Integer opcao = Integer.parseInt(reader.readLine());
+
+            if (usuarioAtivo.eadm()) {
+                todasPostagens.remove(opcao - 1);
+                System.out.println("Post " + (opcao - 1) + " removido");
+            }
+
+            if (!usuarioAtivo.eadm()) {
+                if (todasPostagens.get(opcao - 1).getAutor().equals(usuarioAtivo)) {
+                    todasPostagens.remove(opcao - 1);
+                    System.out.println("Post " + (opcao) + " removido");
+                } else {
+                    System.out.println("Você não tem permissão para deletar esse post");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada ou usuário não selecionado");
         }
     }
 
