@@ -6,7 +6,7 @@ public class Comentario{
 
     public Comentario(User a, String t){
         this.autor = a;
-        this.texto = t.substring(0,100);
+        this.texto = t.substring(0,t.length() >= 100 ? 100 : t.length());
         this.data = LocalDateTime.now();
     }
 
@@ -20,6 +20,10 @@ public class Comentario{
 
     public LocalDateTime getData(){
         return data;
+    }
+
+    public String toString() {
+        return String.format("\n-----------\nComentário:\nAutor: %s\nData: %s\nTexto: %s\n", autor.getNome(), data, texto);
     }
     
 }
