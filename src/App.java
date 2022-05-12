@@ -7,6 +7,7 @@ public class App {
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
+
         Menu menu = new Menu(reader);
         menu.usuariosPadroes();
         menu.postsPadroes();
@@ -18,6 +19,7 @@ public class App {
         System.out.println("3 - Listar postagens");
         System.out.println("4 - Excluir postagem");
         System.out.println("5 - Criar novo usuário");
+
         System.out.println("6 - Adicionar palavra proibida");
         System.out.println("7 - Remover palavra proibida");
         System.out.println("8 - Ver log de posts proibidos");
@@ -25,7 +27,7 @@ public class App {
 
         // Reading data using readLine
         Integer opcao = 0;
-        while (opcao != 9) {
+        while (opcao != 99) {
             try {
                 opcao = Integer.parseInt(reader.readLine());
                 switch (opcao) {
@@ -45,23 +47,26 @@ public class App {
                         menu.criarNovoUsuario();
                         break;
                     case 6:
-                        menu.adicionarPalavraProibida();
+                        menu.criarComentario();
                         break;
                     case 7:
-                        menu.removerPalavraProibida();
+                        menu.adicionarPalavraProibida();
                         break;
                     case 8:
+                        menu.removerPalavraProibida();
+                        break;
+                    case 9:
                         menu.verLogPostagensProibidas();
                         break;
                 }
-                if (opcao != 9) {
+                if (opcao != 99) {
                     System.out.println("Digite nova opção:");
+
                 }
             } catch (Exception e) {
                 System.out.println("Opção inválida, digite nova opção:");
 
             }
         }
-
     }
 }
