@@ -236,6 +236,44 @@ public class Menu {
         }
     }
 
+    public void buscarPorPostagem() {
+        try {
+            System.out.println("digite o número da opção desejada:");
+            System.out.println("1 - Buscar por texto");
+            System.out.println("2 - Buscar por tags");
+
+            Integer opcao = Integer.parseInt(reader.readLine());
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite a palavra que deseja procurar em algum post");
+                    String palavra = reader.readLine();
+                    if (!palavrasProibidas.contains(palavra)) {
+                        for (Post postagem : todasPostagens) {
+                            if (postagem.getTexto().toLowerCase().contains(palavra)) {
+                                System.out.println(postagem);
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.println("Digite a tag que deseja procurar em algum post");
+                    String tag = reader.readLine();
+                    if (!palavrasProibidas.contains(tag)) {
+                        for (Post postagem : todasPostagens) {
+                            for (String tags : postagem.getTags()) {
+                                if (tag.equals(tags)) {
+                                    System.out.println(postagem);
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada");
+        }
+    }
+
     public void usuariosPadroes() {
         todosUsuarios.add(new User("joao", true));
         todosUsuarios.add(new User("pedro", false));

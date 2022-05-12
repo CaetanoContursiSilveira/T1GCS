@@ -19,11 +19,12 @@ public class App {
         System.out.println("3 - Listar postagens");
         System.out.println("4 - Excluir postagem");
         System.out.println("5 - Criar novo usuário");
-
-        System.out.println("6 - Adicionar palavra proibida");
-        System.out.println("7 - Remover palavra proibida");
-        System.out.println("8 - Ver log de posts proibidos");
-        System.out.println("9 - Sair");
+        System.out.println("6 - Criar novo comentário");
+        System.out.println("7 - Buscar por postagem");
+        System.out.println("8 - Adicionar palavra proibida");
+        System.out.println("9 - Remover palavra proibida");
+        System.out.println("10 - Ver log de posts proibidos");
+        System.out.println("99 - Sair");
 
         // Reading data using readLine
         Integer opcao = 0;
@@ -50,12 +51,15 @@ public class App {
                         menu.criarComentario();
                         break;
                     case 7:
-                        menu.adicionarPalavraProibida();
+                        menu.buscarPorPostagem();
                         break;
                     case 8:
-                        menu.removerPalavraProibida();
+                        menu.adicionarPalavraProibida();
                         break;
                     case 9:
+                        menu.removerPalavraProibida();
+                        break;
+                    case 10:
                         menu.verLogPostagensProibidas();
                         break;
                 }
