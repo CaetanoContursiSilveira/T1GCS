@@ -1,20 +1,22 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menu {
     private ArrayList<Post> todasPostagens;
     private ArrayList<User> todosUsuarios;
+    private ArrayList<String> palavrasProibidas;
+    private ArrayList<Post> logPostagensProibidas;
     private User usuarioAtivo;
     private BufferedReader reader;
 
     public Menu(BufferedReader reader) {
         this.todasPostagens = new ArrayList<>();
         this.todosUsuarios = new ArrayList<>();
+        this.palavrasProibidas = new ArrayList<>();
+        this.logPostagensProibidas = new ArrayList<>();
         this.reader = reader;
         this.usuarioAtivo = null;
     }
@@ -50,10 +52,25 @@ public class Menu {
         try {
             // só postar se tiver usuario
             if (usuarioAtivo != null) {
-                System.out.println("Digite o texto da postagem:");
-                String texto = reader.readLine();
+                String texto = "";
 
-                Post novo = new Post((todosUsuarios.size() + 1), usuarioAtivo, texto);
+                boolean permitido = false;
+                while (!permitido) {
+                    System.out.println("Digite o texto da postagem:");
+                    texto = reader.readLine();
+                    for (String palavra : palavrasProibidas) {
+                        if (!texto.toLowerCase().contains(palavra.toLowerCase())) {
+                            permitido = true;
+                        } else {
+                            System.out.println("A palavra " + palavra + " não é permitida");
+                            Post proibido = new Post((todasPostagens.size() + 1), usuarioAtivo, texto);
+                            logPostagensProibidas.add(proibido);
+                            return;
+                        }
+                    }
+                }
+
+                Post novo = new Post((todasPostagens.size() + 1), usuarioAtivo, texto);
 
                 System.out.println("Digite as tags da postagem (separados por vírgula):");
                 String tags = reader.readLine();
@@ -138,6 +155,62 @@ public class Menu {
         }
     }
 
+    public void adicionarPalavraProibida() {
+        try {
+            if (usuarioAtivo.eadm()) {
+                System.out.println("Digite a palavra proibida");
+                String palavra = reader.readLine();
+                palavrasProibidas.add(palavra);
+                System.out.println(palavra + " agora é uma palavra proibida!");
+            } else {
+                System.out.println("Você não possui permissão para adicionar palavras proibidas");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada ou usuário não selecionado");
+        }
+    }
+
+    public void removerPalavraProibida() {
+        try {
+            if (usuarioAtivo.eadm()) {
+                System.out.println("Digite a palavra proibida que deseja remover da seguinte lista:\n");
+                listarPalavrasProibidas();
+                String palavra = reader.readLine();
+                palavrasProibidas.remove(palavra);
+                System.out.println(palavra + " não é mais uma palavra proibida!");
+            } else {
+                System.out.println("Você não possui permissão para remover palavras proibidas");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada ou usuário não selecionado");
+        }
+    }
+
+    public void listarPalavrasProibidas() {
+        for (String palavra : palavrasProibidas) {
+            System.out.println(palavra);
+        }
+    }
+
+    public void verLogPostagensProibidas() {
+        try {
+            if (usuarioAtivo.eadm()) {
+                if (logPostagensProibidas.size() != 0) {
+                    for (Post postagem : logPostagensProibidas) {
+                        System.out.println("\n---------------------------------");
+                        System.out.println(postagem);
+                    }
+                } else {
+                    System.out.println("Nenhuma postagem ainda");
+                }
+            } else {
+                System.out.println("Você não tem permissao para ver os logs");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao processar entrada ou usuário não selecionado");
+        }
+    }
+
     public void usuariosPadroes() {
         todosUsuarios.add(new User("joao", true));
         todosUsuarios.add(new User("pedro", false));
@@ -150,17 +223,23 @@ public class Menu {
         todasPostagens.add(new Post(1, todosUsuarios.get(0), "post do joao 1"));
         todasPostagens.add(new Post(2, todosUsuarios.get(0), "post do joao 2"));
         todasPostagens.add(new Post(3, todosUsuarios.get(0), "post do joao 3"));
-        todasPostagens.add(new Post(4, todosUsuarios.get(1), "post do pedro 1"));
-        todasPostagens.add(new Post(5, todosUsuarios.get(1), "post do pedro 2"));
-        todasPostagens.add(new Post(6, todosUsuarios.get(1), "post do pedro 3"));
-        todasPostagens.add(new Post(7, todosUsuarios.get(2), "post do lucas 1"));
-        todasPostagens.add(new Post(8, todosUsuarios.get(2), "post do lucas 2"));
-        todasPostagens.add(new Post(9, todosUsuarios.get(2), "post do lucas 3"));
-        todasPostagens.add(new Post(10, todosUsuarios.get(3), "post do matheus 1"));
-        todasPostagens.add(new Post(11, todosUsuarios.get(3), "post do matheus 2"));
-        todasPostagens.add(new Post(12, todosUsuarios.get(3), "post do matheus 3"));
-        todasPostagens.add(new Post(13, todosUsuarios.get(4), "post do nicholas 1"));
-        todasPostagens.add(new Post(14, todosUsuarios.get(4), "post do nicholas 2"));
-        todasPostagens.add(new Post(15, todosUsuarios.get(4), "post do nicholas 3"));
+        // todasPostagens.add(new Post(4, todosUsuarios.get(1), "post do pedro 1"));
+        // todasPostagens.add(new Post(5, todosUsuarios.get(1), "post do pedro 2"));
+        // todasPostagens.add(new Post(6, todosUsuarios.get(1), "post do pedro 3"));
+        // todasPostagens.add(new Post(7, todosUsuarios.get(2), "post do lucas 1"));
+        // todasPostagens.add(new Post(8, todosUsuarios.get(2), "post do lucas 2"));
+        // todasPostagens.add(new Post(9, todosUsuarios.get(2), "post do lucas 3"));
+        // todasPostagens.add(new Post(10, todosUsuarios.get(3), "post do matheus 1"));
+        // todasPostagens.add(new Post(11, todosUsuarios.get(3), "post do matheus 2"));
+        // todasPostagens.add(new Post(12, todosUsuarios.get(3), "post do matheus 3"));
+        // todasPostagens.add(new Post(13, todosUsuarios.get(4), "post do nicholas 1"));
+        // todasPostagens.add(new Post(14, todosUsuarios.get(4), "post do nicholas 2"));
+        // todasPostagens.add(new Post(15, todosUsuarios.get(4), "post do nicholas 3"));
+    }
+
+    public void palavrasProibidasPadroes() {
+        palavrasProibidas.add("proibida1");
+        palavrasProibidas.add("proibida2");
+        palavrasProibidas.add("proibida3");
     }
 }

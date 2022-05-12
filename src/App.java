@@ -10,6 +10,7 @@ public class App {
         Menu menu = new Menu(reader);
         menu.usuariosPadroes();
         menu.postsPadroes();
+        menu.palavrasProibidasPadroes();
 
         System.out.println("Bem Vindo ao Blog Interno de T1GCS, digite o número da opção desejada:");
         System.out.println("1 - Escolher usuário ativo");
@@ -17,6 +18,9 @@ public class App {
         System.out.println("3 - Listar postagens");
         System.out.println("4 - Excluir postagem");
         System.out.println("5 - Criar novo usuário");
+        System.out.println("6 - Adicionar palavra proibida");
+        System.out.println("7 - Remover palavra proibida");
+        System.out.println("8 - Ver log de posts proibidos");
         System.out.println("9 - Sair");
 
         // Reading data using readLine
@@ -39,6 +43,15 @@ public class App {
                         break;
                     case 5:
                         menu.criarNovoUsuario();
+                        break;
+                    case 6:
+                        menu.adicionarPalavraProibida();
+                        break;
+                    case 7:
+                        menu.removerPalavraProibida();
+                        break;
+                    case 8:
+                        menu.verLogPostagensProibidas();
                         break;
                 }
                 if (opcao != 9) {
