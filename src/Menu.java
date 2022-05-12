@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menu {
     private ArrayList<Post> todasPostagens;
@@ -96,17 +97,48 @@ public class Menu {
 
     }
 
-    public void listarPostagens() {
-        if (todasPostagens.size() != 0) {
-            for (Post postagem : todasPostagens) {
-                System.out.println("\n---------------------------------");
-                System.out.println(postagem);
-            }
-        } else {
-            System.out.println("Nenhuma postagem ainda");
+public void listarPostagens() {
+    if (todasPostagens.size() != 0) {
+        for (Post postagem : todasPostagens) {
+            System.out.println("\n---------------------------------");
+            System.out.println(postagem);
         }
-
+    } else {
+        System.out.println("Nenhuma postagem ainda");
     }
+
+}
+public void criarNovoUsuario() {
+    try {
+        System.out.print("Digite o nome do usuário: ");
+        String nome = reader.readLine();
+
+        System.out.println(
+                "Digite T para solicitar privilégios de administrador, caso contrário, deixe em branco");
+        String adm = reader.readLine();
+        boolean isAdm = false;
+        while (!adm.equals("T")) {
+            if (adm.equals("T")) {
+                isAdm = true;
+            } else {
+                System.out.println("Entrada inválida, digite novamente");
+                adm = reader.readLine();
+            }
+        }
+        todosUsuarios.add(new User(nome, isAdm));
+        System.out.println("Usuário " + nome + " criado!");
+    } catch (Exception e) {
+        System.out.println("Erro ao processar entrada");
+    }
+}
+
+private void listarSumarioPostagens() {
+    for (Post postagem : todasPostagens) {
+        System.out.println("\n---------------------------------");
+        System.out.println(postagem.sumario());
+    }
+}
+
 
     public void criarNovoUsuario() {
         try {
@@ -132,6 +164,24 @@ public class Menu {
         }
     }
 
+  public void criarComentario() {
+    try {
+        listarSumarioPostagens();
+        System.out.println("Digite o ID da postagem que deseja comentar:");
+        int id = Integer.parseInt(reader.readLine());
+
+        Post postagem = todasPostagens.get(id-1);
+        System.out.println("Digite o seu comentario:");
+        String texto = reader.readLine();
+
+        Comentario comentario = new Comentario(usuarioAtivo, texto);
+        postagem.AdicionarComentario(comentario);
+
+    } catch (IOException erro) {
+        System.out.println("Erro ao processar entrada");
+    }
+  }
+
     public void excluirPost() {
         try {
             System.out.println("Escolha a postagem que deseja excluir");
@@ -154,6 +204,7 @@ public class Menu {
             System.out.println("Erro ao processar entrada ou usuário não selecionado");
         }
     }
+
 
     public void adicionarPalavraProibida() {
         try {
@@ -242,4 +293,31 @@ public class Menu {
         palavrasProibidas.add("proibida2");
         palavrasProibidas.add("proibida3");
     }
+  
+    public void usuariosPadroes() {
+        todosUsuarios.add(new User("joao", true));
+        todosUsuarios.add(new User("pedro", false));
+        todosUsuarios.add(new User("lucas", true));
+        todosUsuarios.add(new User("matheus", false));
+        todosUsuarios.add(new User("nicolas", true));
+    }
+
+    public void postsPadroes() {
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(0), "post do joao 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(1), "post do pedro 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(2), "post do lucas 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(3), "post do matheus 3"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 1"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 2"));
+        todasPostagens.add(new Post(todosUsuarios.get(4), "post do nicholas 3"));
+    }
+
 }
