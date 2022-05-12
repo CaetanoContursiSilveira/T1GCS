@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +88,7 @@ public class Menu {
                 }
                 novo.AdicionarLink(link);
                 todasPostagens.add(novo);
+                usuarioAtivo.novaPostagem();
             } else {
                 System.out.println("Escolha um usuário antes de postar algo");
             }
@@ -164,12 +166,14 @@ public class Menu {
 
             if (usuarioAtivo.eadm()) {
                 todasPostagens.remove(opcao - 1);
+                todasPostagens.get(opcao - 1).getAutor().apagouPostagem();
                 System.out.println("Post " + (opcao - 1) + " removido");
             }
 
             if (!usuarioAtivo.eadm()) {
                 if (todasPostagens.get(opcao - 1).getAutor().equals(usuarioAtivo)) {
                     todasPostagens.remove(opcao - 1);
+                    usuarioAtivo.apagouPostagem();
                     System.out.println("Post " + (opcao) + " removido");
                 } else {
                     System.out.println("Você não tem permissão para deletar esse post");
@@ -271,6 +275,23 @@ public class Menu {
             }
         } catch (Exception e) {
             System.out.println("Erro ao processar entrada");
+        }
+    }
+
+    public void informacoesParaOAdm() {
+        if (usuarioAtivo.eadm()) {
+            int nDePosts = todasPostagens.size();
+            int nDeComentarios = 0;
+            for (Post post : todasPostagens) {
+                nDeComentarios += post.getComentarios().size();
+            }
+            int nDeUsuarios = todosUsuarios.size();
+
+            System.out.println("Numero de posts: " + nDePosts);
+            System.out.println("Numero de comentários: " + nDeComentarios);
+            System.out.println("Numero de usuários: " + nDeUsuarios);
+        } else {
+            System.out.println("Você não possui permissão para acessar esses dados");
         }
     }
 
