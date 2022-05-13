@@ -25,6 +25,9 @@ public class App {
         System.out.println("9 - Remover palavra proibida");
         System.out.println("10 - Ver log de posts proibidos");
         System.out.println("11 - Informações para o adm");
+        System.out.println("12 - Top 5 usuários com mais postagens" );
+        System.out.println("13 - Top 5 postagens mais comentadas");
+        System.out.println("14 - Top 10 usuários com mais comentários");
         System.out.println("99 - Sair");
 
         // Reading data using readLine
@@ -65,6 +68,15 @@ public class App {
                         break;
                     case 11:
                         menu.informacoesParaOAdm();
+                        break;
+                    case 12:
+                        menu.UsuariosComMaisPostagens();
+                        break;
+                    case 13:
+                        menu.PostagensMaisComentadas();
+                        break;
+                    case 14:
+                        menu.UsuariosComMaisComentarios();
                         break;
                 }
                 if (opcao != 99) {
