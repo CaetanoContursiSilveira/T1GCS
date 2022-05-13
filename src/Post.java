@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Post {
+public class Post implements Comparable<Post>{
     private int id;
     private User autor;
     private String texto;
@@ -65,5 +65,16 @@ public class Post {
 
     public String sumario() {
         return String.format("Id: %d\nTexto: %s", id, texto);
+    }
+
+    @Override
+    public int compareTo(Post o) {
+        if (this.comentarios.size() < o.comentarios.size()) {
+            return -1;
+        }
+        if (this.comentarios.size() > o.comentarios.size()) {
+            return 1;
+        }
+        return 0;
     }
 }
