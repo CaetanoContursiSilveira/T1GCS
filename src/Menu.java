@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Menu {
@@ -72,7 +73,6 @@ public class Menu {
                 }
 
                 Post novo = new Post((todasPostagens.size() + 1), usuarioAtivo, texto);
-
                 System.out.println("Digite as tags da postagem (separados por vírgula):");
                 String tags = reader.readLine();
                 List<String> list = Arrays.asList(tags.split(","));
@@ -153,6 +153,7 @@ public class Menu {
 
             Comentario comentario = new Comentario(usuarioAtivo, texto);
             postagem.AdicionarComentario(comentario);
+            usuarioAtivo.novoComentario();
 
         } catch (IOException erro) {
             System.out.println("Erro ao processar entrada");
@@ -318,5 +319,41 @@ public class Menu {
         palavrasProibidas.add("proibida2");
         palavrasProibidas.add("proibida3");
     }
+
+    public void UsuariosComMaisPostagens(){
+        List<User> ordenada = todosUsuarios;
+        Collections.sort(ordenada);
+        List <User> top5 = ordenada.subList(0, 4);
+        int i = 1;
+        for (User user : top5) {
+            System.out.println(i +  "º " + user.getNome());
+            i++;
+        }
+
+    }
+
+    public void PostagensMaisComentadas(){
+        List<Post> ordenada = todasPostagens;
+        Collections.sort(ordenada);
+        int i = 1;
+        List <Post> top5 = ordenada.subList(0, 4);
+        for (Post post : top5) {
+            System.out.println(i + "º " + post.sumario());
+            i++;
+        }     
+    }
+
+    public void UsuariosComMaisComentarios(){
+        List<User> ordenada = todosUsuarios;
+        Collections.sort(ordenada,new ComparaComentarios());
+        int i = 1;
+        List<User> top10 = ordenada.subList(0, 9);
+        for (User user : top10) {
+            System.out.println(i + "º " + user.getNome());
+            i++;
+        }
+    }
+
+
 
 }
